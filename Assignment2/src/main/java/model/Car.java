@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author Zhen
+ * @author Animal
  */
 public class Car {
     private LocalDateTime availableTime;

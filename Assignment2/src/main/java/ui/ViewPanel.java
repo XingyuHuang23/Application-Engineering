@@ -17,7 +17,7 @@ import static ui.CreatePanel.infoBox;
 
 /**
  *
- * @author Zhen
+ * @author Animal
  */
 public class ViewPanel extends javax.swing.JPanel {
 

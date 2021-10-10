@@ -14,7 +14,7 @@ import model.CarFleet;
 
 /**
  *
- * @author Zhen
+ * @author Animal
  */
 public class CreatePanel extends javax.swing.JPanel {
 

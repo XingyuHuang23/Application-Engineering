@@ -10,7 +10,7 @@ import model.CarFleet;
 
 /**
  *
- * @author Zhen
+ * @author Animal
  */
 public class MainFram extends javax.swing.JFrame {
 
