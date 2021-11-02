@@ -761,6 +761,28 @@ public class ViewPanel extends javax.swing.JPanel {
                  
              }    
         }else{
+            if(person instanceof Patient){
+                  List<String> encouterHistory = ((Patient) person).getEncouterHistory();
+                String vitalSign = UUID.randomUUID().toString().substring(0,5) +"-"+person.getName();
+                encouterHistory.add(vitalSign);
+                
+               Patient patient = new Patient(nameShow.getText(),houseShow.getText(),cityShow.getText(),communityShow.getText(),Integer.valueOf(ageShow.getText()),blood,encouterHistory);
+               person = patient;
+               //改
+               for(Person p:HospitalSystem.PersonsDirectory){
+                 if(p.getName().equals(nameShow.getText())){
+                        HospitalSystem.PersonsDirectory.remove(p);
+                        HospitalSystem.PersonsDirectory.add(patient);
+                 }
+             }
+            
+             for(Person p:HospitalSystem.PatientDirectory){
+                 if(p.getName().equals(nameShow.getText())){
+                        HospitalSystem.PatientDirectory.remove(p);
+                        HospitalSystem.PatientDirectory.add(patient);
+                 }
+             }
+            }else{
              Person personNew =  new Person(nameShow.getText(),houseShow.getText(),cityShow.getText(),communityShow.getText(),Integer.valueOf(ageShow.getText()),blood);
              person = personNew;
               for(Person p:HospitalSystem.PersonsDirectory){
@@ -768,7 +790,9 @@ public class ViewPanel extends javax.swing.JPanel {
                         HospitalSystem.PersonsDirectory.remove(p);
                         HospitalSystem.PersonsDirectory.add(personNew);
                  }
-             } 
+             }
+            }
+             
         }
  
         
