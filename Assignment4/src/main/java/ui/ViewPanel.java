@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JOptionPane;
@@ -96,6 +97,7 @@ public class ViewPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblVitalSigns = new javax.swing.JTable();
         nameShow = new javax.swing.JLabel();
+        delete = new javax.swing.JButton();
 
         lblViewCar.setFont(new java.awt.Font("宋体", 0, 18)); // NOI18N
         lblViewCar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -314,6 +316,13 @@ public class ViewPanel extends javax.swing.JPanel {
 
         nameShow.setText("Name");
 
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -391,8 +400,11 @@ public class ViewPanel extends javax.swing.JPanel {
                                 .addComponent(cityShow)
                                 .addComponent(bloodShow)
                                 .addComponent(houseShow)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jButton1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(delete)))
                             .addComponent(nameShow))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -459,7 +471,9 @@ public class ViewPanel extends javax.swing.JPanel {
                             .addComponent(jLabel9)
                             .addComponent(bloodShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(delete))))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(22, 22, 22)
@@ -763,8 +777,8 @@ public class ViewPanel extends javax.swing.JPanel {
         }else{
             if(person instanceof Patient){
                   List<String> encouterHistory = ((Patient) person).getEncouterHistory();
-                String vitalSign = UUID.randomUUID().toString().substring(0,5) +"-"+person.getName();
-                encouterHistory.add(vitalSign);
+//                String vitalSign = UUID.randomUUID().toString().substring(0,5) +"-"+person.getName();
+//                encouterHistory.add(vitalSign);
                 
                Patient patient = new Patient(nameShow.getText(),houseShow.getText(),cityShow.getText(),communityShow.getText(),Integer.valueOf(ageShow.getText()),blood,encouterHistory);
                person = patient;
@@ -804,6 +818,40 @@ public class ViewPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        // TODO add your handling code here:
+        String name  = nameShow.getText();
+       showInformation(new Person());
+       
+       Iterator<Patient> it = HospitalSystem.PatientDirectory.iterator();
+        while (it.hasNext())
+        {
+            Patient p = it.next();
+            if (p.getName().equals(name))
+            {
+                it.remove();
+            }
+        }
+
+        System.out.println(name+"---2");
+        
+      Iterator<Person>  itPerson = HospitalSystem.PersonsDirectory.iterator();
+       while (itPerson.hasNext())
+        {
+            Person p = itPerson.next();
+            if (p.getName().equals(name))
+            {
+                itPerson.remove();
+            }
+        }
+        
+         System.out.println(name+"---3");
+        infoBox("Delete successfully", "Success");
+        
+        populateTable(HospitalSystem.PatientDirectory,HospitalSystem.PersonsDirectory);
+        
+    }//GEN-LAST:event_deleteActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ageShow;
@@ -816,6 +864,7 @@ public class ViewPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnListAll;
     private javax.swing.JTextField cityShow;
     private javax.swing.JTextField communityShow;
+    private javax.swing.JButton delete;
     private javax.swing.JTextField houseShow;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -917,12 +966,15 @@ public class ViewPanel extends javax.swing.JPanel {
     }
     
     private void showInformation(Person person) {
-             nameShow.setText(person.getName());
-             ageShow.setText(person.getAge()+"");    
-             communityShow.setText(person.getCommunity());        
-             cityShow.setText(person.getCity());    
-             houseShow.setText(person.getHouse());
-             bloodShow.setText(person.getBloodPressure()+"");
+             if(person!=null){
+                 nameShow.setText(person.getName());
+                 ageShow.setText(person.getAge()+"");    
+                 communityShow.setText(person.getCommunity());        
+                 cityShow.setText(person.getCity());    
+                 houseShow.setText(person.getHouse());
+                 bloodShow.setText(person.getBloodPressure()+"");
+             }
+             
              
              
              if(person instanceof Patient){
