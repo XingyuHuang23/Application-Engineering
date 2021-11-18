@@ -51,11 +51,29 @@ public class OrderDirectory {
                  }     
                return  list;
     }
-    
+    public List<Order> getOrderListByUserAndFinished(String user,ArrayList<Order> orderList){
+                List<Order> list = new ArrayList<Order>();
+                 for(Order order:orderList){ 
+                    if(order.getCustomer().equals(user) && order.getStatus().equals("Finished")){      
+                           list.add(order);
+                    }      
+                 }     
+               return  list;
+    }
      public List<Order> getOrderListByRest(String rest,ArrayList<Order> orderList){
                 List<Order> list = new ArrayList<Order>();
                  for(Order order:orderList){ 
                     if(order.getRestaurant().equals(rest)){      
+                           list.add(order);
+                    }      
+                 }     
+               return  list;
+    }
+     public List<Order> getOrderListByDeliver(String name,ArrayList<Order> orderList){
+         
+                List<Order> list = new ArrayList<Order>();
+                 for(Order order:orderList){ 
+                    if(order.getDeliver().equals(name)){      
                            list.add(order);
                     }      
                  }     
@@ -75,6 +93,24 @@ public class OrderDirectory {
                     if(order.getOrderId().equals(id)){ 
                             order.setDeliver(deliver);  
                             order.setStatus("On the way");
+                           return order;
+                    }      
+                 }     
+               return  null;
+    }
+     public Order setOrderFinished(String id,ArrayList<Order> orderList){      
+                 for(Order order:orderList){ 
+                    if(order.getOrderId().equals(id)){      
+                            order.setStatus("Finished");
+                           return order;
+                    }      
+                 }     
+               return  null;
+    }
+     public Order cancelOrder(String id,ArrayList<Order> orderList){      
+                 for(Order order:orderList){ 
+                    if(order.getOrderId().equals(id)){         
+                            order.setStatus("Canceled");
                            return order;
                     }      
                  }     

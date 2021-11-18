@@ -319,8 +319,7 @@ public class OrderManage extends javax.swing.JPanel {
         Order order = ecosystem.getOrderDirectory().getOrderByOrderId(id, ecosystem.getOrderDirectory().getOrderList());
         if(order != null){
               populateOrderTable(order);
-              showInformation(order);
-              
+              showInformation(order);     
         }else{
            infoBox("Id not exist, please check", "Invalid"); return;
         }
@@ -371,7 +370,7 @@ public class OrderManage extends javax.swing.JPanel {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(isValid(DeliverShow.getText()) && isValidDeliverName(DeliverShow.getText())){
+        if(IdShow.getText() != "id" && isValid(DeliverShow.getText()) && !isValidDeliverName(DeliverShow.getText())){
           
             String orderId =  IdShow.getText();
             
@@ -383,33 +382,27 @@ public class OrderManage extends javax.swing.JPanel {
             populateDeliverTable();
             infoBox("Set deliver successfully", "Success");     
         }else {
-            infoBox("Invalid Deliver, please check", "Invalid");
+            infoBox("Invalid Deliver or Id, please check", "Invalid");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         // TODO add your handling code here:
-        String name = IdShow.getText();
-        
-//          for( UserAccount ua :roleList){
-//              if(ua.getUsername().equals(name)){
-//                   
-//                    roleList.remove(ua); 
-//                    showInformation(new UserAccount());
-//                    break;    
-//              }
-//           }
+            String orderId = IdShow.getText();
+            if(isValid(orderId)){
+                      Order order =  ecosystem.getOrderDirectory().cancelOrder(orderId,ecosystem.getOrderDirectory().getOrderList());
+           
+               if(order.getDeliver()!=null){
+                  ecosystem.getDeliveryManDirectory().cancelOrFinishedDrliver(order.getDeliver(),order.getOrderId(),ecosystem.getDeliveryManDirectory().getDeliveryManList());
+               }
+            
+                populateOrderTable(ua);
+                populateDeliverTable();
+                 infoBox("Cancel order successfully", "Success");
+            }else{
+                infoBox("Id wrong!!", "invalid");
+            } 
           
-//         for( UserAccount ua :list){
-//              if(ua.getUsername().equals(name)){
-//                 
-//                    list.remove(ua);      
-//                    break;    
-//              }
-//           }
-        populateOrderTable(ua);
-        
-        infoBox("Cancel order successfully", "Success");
     }//GEN-LAST:event_CancelActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed

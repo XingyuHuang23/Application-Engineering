@@ -6,6 +6,7 @@
 package Business.DeliveryMan;
 
 import Business.Customer.Customer;
+import Business.Order.Order;
 import java.util.ArrayList;
 
 /**
@@ -29,4 +30,26 @@ public class DeliveryManDirectory {
         deliverList.add(deliver);
         return deliver;
     }
+
+    public DeliveryMan setDeliverWork(String orderId, String name, ArrayList<DeliveryMan> deliveryManList) {
+             for(DeliveryMan deliver:deliveryManList){      
+                    if(deliver.getName().equals(name)){ 
+                            deliver.getOrders().add(orderId);
+                            deliver.setStatus("working");
+                             return deliver; 
+                    }      
+                 } 
+            return null; 
+    }
+
+    public void cancelOrFinishedDrliver(String name,String orderId, ArrayList<DeliveryMan> deliveryManList) {
+              for(DeliveryMan deliver:deliveryManList){      
+                    if(deliver.getName().equals(name)){ 
+                           deliver.getOrders().remove(orderId);
+                           if(deliver.getOrders().size()==0)  deliver.setStatus("waiting");     
+                           break;
+                    }      
+                 } 
+    }
+   
 }

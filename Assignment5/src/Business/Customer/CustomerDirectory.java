@@ -31,6 +31,16 @@ public class CustomerDirectory {
         customerList.add(customer);
         return customer;
     }
-   
     
+      public Customer getInstanceByName(String name,ArrayList<Customer> customerList){
+                
+        
+                 for(Customer customer:customerList){ 
+                    if(customer.getName().equals(name)){      
+                           return customer;                     
+                    }      
+                 }
+                
+               return  null;
+    }
 }

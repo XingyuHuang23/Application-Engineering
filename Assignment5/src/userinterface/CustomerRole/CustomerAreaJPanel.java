@@ -436,8 +436,10 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
-
-        populateRequestTable();
+            
+       CommentJPanel commentJpanel = new CommentJPanel(splitPanel,ua,ecosystem);
+       
+       splitPanel.setRightComponent(commentJpanel);
         
     }//GEN-LAST:event_refreshTestJButtonActionPerformed
 
