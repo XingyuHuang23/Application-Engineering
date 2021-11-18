@@ -5,8 +5,10 @@
  */
 package userinterface.RestaurantAdminRole;
 
+import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Employee.Employee;
+import Business.Order.Order;
 import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.CustomerRole;
@@ -44,7 +46,7 @@ public class OrderManage extends javax.swing.JPanel {
     
     private List<UserAccount> list;
     
-   
+     private Restaurant  ua;
     
     private JSplitPane jSplitPane1;
     /**
@@ -56,52 +58,25 @@ public class OrderManage extends javax.swing.JPanel {
      * @param fleet
      */
 
-//    public ViewPanel(EcoSystem ecosystem,RoleType role){
-//        initComponents();
-//        this.ecosystem = ecosystem;
-//
-//        this.roleType = role;
-//        
-//        this.roleList = ecosystem.getUserAccountDirectory().getKeyRole(roleType); //仅供当前页面方便展现使用
-//        
-//        this.list = ecosystem.getUserAccountDirectory().getUserAccountList();//任何修改（CRUD）都要在这里面进行
-//        
-//        
-//        preWork(role);
-//        System.out.print(roleList.size()+"进入时的size");
-//        
-//        populateTable(ecosystem.getUserAccountDirectory().getKeyRole(role));
-//    }
 
-    public OrderManage(EcoSystem ecosystem, RoleType roleType,JSplitPane jSplitPane1) {
+    public OrderManage(EcoSystem ecosystem,JSplitPane jSplitPane1,Restaurant ua) {
               this.ecosystem = ecosystem;
 
-              this.roleType = roleType;
+              this.ua = ua;
               
               this.jSplitPane1 = jSplitPane1;
               
-              this.roleList = ecosystem.getUserAccountDirectory().getKeyRole(roleType); //仅供当前页面方便展现使用
-        
-              this.list = ecosystem.getUserAccountDirectory().getUserAccountList();//任何修改（CRUD）都要在这里面进行
               initComponents();
         
               preWork(roleType);
   
-          populateTable(ecosystem.getUserAccountDirectory().getKeyRole(roleType));
+              populateOrderTable(ua);
+               populateDeliverTable();
     }
     
     private void preWork(RoleType role){
         
-        txtRole.setText(role.getValue());
-        
-        lblView.setText(role.getValue() + " Information Panel");
-        txtRes.setVisible(false);
-        jLabelRes.setVisible(false);
-        
-        if(role.getValue().equals(RoleType.RestaurantAdmin.toString())){
-                     txtRes.setVisible(true);
-                    jLabelRes.setVisible(true);
-        }
+
     }
     
     public static void infoBox(String infoMessage, String titleBar)
@@ -119,63 +94,58 @@ public class OrderManage extends javax.swing.JPanel {
 
         lblView = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblPersonView = new javax.swing.JTable();
-        btnFindByName = new javax.swing.JButton();
-        txtFindByName = new javax.swing.JTextField();
+        tblDeliverView = new javax.swing.JTable();
+        btnFindId = new javax.swing.JButton();
+        txtFindById = new javax.swing.JTextField();
         lblFindByBrand = new javax.swing.JLabel();
         btnListAll = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        pswShow = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        nameShow = new javax.swing.JLabel();
-        delete = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtUserName = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        addButton = new javax.swing.JButton();
-        txtPsw = new javax.swing.JTextField();
+        IdShow = new javax.swing.JLabel();
+        Cancel = new javax.swing.JButton();
         back = new javax.swing.JButton();
         txtRole = new javax.swing.JLabel();
-        jLabelRes = new javax.swing.JLabel();
-        txtRes = new javax.swing.JTextField();
+        DeliverShow = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ShowOrderList = new javax.swing.JTable();
+        enterpriseLabel1 = new javax.swing.JLabel();
 
         lblView.setFont(new java.awt.Font("宋体", 0, 18)); // NOI18N
         lblView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblView.setText("Information Panel");
+        lblView.setText("Order Manage Panel");
 
-        tblPersonView.setModel(new javax.swing.table.DefaultTableModel(
+        tblDeliverView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Name", "PassWord", "Role", "Employee"
+                "Deliver", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblPersonView);
+        jScrollPane1.setViewportView(tblDeliverView);
 
-        btnFindByName.setText("Find By Name");
-        btnFindByName.addActionListener(new java.awt.event.ActionListener() {
+        btnFindId.setText("Find By Id");
+        btnFindId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFindByNameActionPerformed(evt);
+                btnFindIdActionPerformed(evt);
             }
         });
 
-        txtFindByName.addActionListener(new java.awt.event.ActionListener() {
+        txtFindById.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFindByNameActionPerformed(evt);
+                txtFindByIdActionPerformed(evt);
             }
         });
 
@@ -186,54 +156,23 @@ public class OrderManage extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setText("Name");
+        jLabel4.setText("Order");
 
-        jLabel5.setText("Password");
+        jLabel5.setText("Deliver");
 
-        pswShow.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pswShowActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("SAVE");
+        jButton1.setText("Confirm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        nameShow.setText("Name");
+        IdShow.setText("id");
 
-        delete.setText("Delete");
-        delete.addActionListener(new java.awt.event.ActionListener() {
+        Cancel.setText("Cancel");
+        Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("UserName:");
-
-        jLabel3.setText("PassWord:");
-
-        txtUserName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserNameActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setText("Role:");
-
-        addButton.setText("ADD");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
-            }
-        });
-
-        txtPsw.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPswActionPerformed(evt);
+                CancelActionPerformed(evt);
             }
         });
 
@@ -244,13 +183,42 @@ public class OrderManage extends javax.swing.JPanel {
             }
         });
 
-        jLabelRes.setText("Restaurant:");
-
-        txtRes.addActionListener(new java.awt.event.ActionListener() {
+        DeliverShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtResActionPerformed(evt);
+                DeliverShowActionPerformed(evt);
             }
         });
+
+        ShowOrderList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Order Id", "Deliver", "Customer", "Items", "Price", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(ShowOrderList);
+
+        enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enterpriseLabel1.setText("Handle Order");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -258,59 +226,42 @@ public class OrderManage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblView, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(lblFindByBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnListAll, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(25, 25, 25)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(73, 73, 73)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabelRes)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtRes, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel1)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(24, 24, 24)
-                                            .addComponent(jLabel3)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(64, 64, 64)
-                                            .addComponent(jLabel10)))))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(txtRole)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(30, 30, 30)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(pswShow)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jButton1)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(delete))
-                                        .addComponent(nameShow)
-                                        .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnFindByName, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtFindByName, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 60, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtRole))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnListAll, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(btnFindId, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtFindById, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(IdShow)
+                            .addComponent(DeliverShow, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Cancel))
+                            .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(enterpriseLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(lblFindByBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,65 +269,63 @@ public class OrderManage extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addComponent(lblView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(addButton)
-                    .addComponent(txtPsw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRole))
-                .addGap(9, 9, 9)
-                .addComponent(lblFindByBrand)
-                .addGap(18, 18, 18)
+                .addComponent(txtRole)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnFindByName)
-                        .addComponent(txtFindByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelRes)
-                        .addComponent(txtRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnListAll)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(nameShow))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(pswShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(lblFindByBrand))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnFindId)
+                                    .addComponent(txtFindById, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnListAll))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(90, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(enterpriseLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(IdShow))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(DeliverShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(delete))
-                        .addGap(74, 74, 74)
-                        .addComponent(back)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                            .addComponent(Cancel))
+                        .addGap(18, 18, 18)
+                        .addComponent(back)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFindByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindByNameActionPerformed
+    private void btnFindIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindIdActionPerformed
         // TODO add your handling code here:
-        String name = txtFindByName.getText();
+        String id = txtFindById.getText();
         
-        if(!isValidString(name)){
-              infoBox("Invalid Name data type, please check", "Invalid"); return;
+        if(!isValid(id)){
+              infoBox("Invalid Id data type, please check", "Invalid"); return;
          } 
         
-        for(UserAccount p: list){
-            if(p.getUsername().equals(name)){
-                populateTablePerson(p);
-                showInformation(p);
-                return;
-            }
+        Order order = ecosystem.getOrderDirectory().getOrderByOrderId(id, ecosystem.getOrderDirectory().getOrderList());
+        if(order != null){
+              populateOrderTable(order);
+              showInformation(order);
+              
+        }else{
+           infoBox("Id not exist, please check", "Invalid"); return;
         }
-        
-         infoBox("Name not exist, please check", "Invalid"); 
-    }//GEN-LAST:event_btnFindByNameActionPerformed
+    
+    }//GEN-LAST:event_btnFindIdActionPerformed
    
      private boolean isValid(String s){
         return s.matches("^[A-Za-z0-9]+$");
@@ -387,8 +336,7 @@ public class OrderManage extends javax.swing.JPanel {
      private boolean isValidInt(String s){
         return s.matches("^[0-9]*$");
     }
-    private boolean isValidName(String s){
-      
+    private boolean isValidDeliverName(String s){
         return ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(s);
     }
      private boolean isValidRole(String s){
@@ -397,28 +345,24 @@ public class OrderManage extends javax.swing.JPanel {
     }
     private void btnListAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListAllActionPerformed
         // TODO add your handling code here:
-         populateTable(ecosystem.getUserAccountDirectory().getKeyRole(roleType));
+         populateOrderTable(ua);
     }//GEN-LAST:event_btnListAllActionPerformed
 
-    private void txtFindByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindByNameActionPerformed
+    private void txtFindByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindByIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFindByNameActionPerformed
-
-    private void pswShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswShowActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pswShowActionPerformed
+    }//GEN-LAST:event_txtFindByIdActionPerformed
 
     private boolean typeCheck(){
         boolean flag = true;
         String check;
 
-        if(!isValidString(txtUserName.getText())){
-            txtUserName.setText("");
+        if(!isValidString(DeliverShow.getText())){
+            DeliverShow.setText("");
             flag = false;
         }
         
-         if(!isValidName(txtUserName.getText())){
-            txtUserName.setText("");
+         if(!isValidDeliverName(DeliverShow.getText())){
+            DeliverShow.setText("");
             flag = false;
         }
          
@@ -427,178 +371,169 @@ public class OrderManage extends javax.swing.JPanel {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(isValid(pswShow.getText())){
+        if(isValid(DeliverShow.getText()) && isValidDeliverName(DeliverShow.getText())){
           
-           for( UserAccount ua :list){
-               if(ua.getUsername().equals(nameShow.getText())){                
-                     ua.setPassword(pswShow.getText());               
-                     break;    
-               }
-           }    
-           
-           for( UserAccount ua :roleList){
-               if(ua.getUsername().equals(nameShow.getText())){                  
-                     ua.setPassword(pswShow.getText());
-                     showInformation(ua);
-                     break;    
-               }
-           }
-           
-        populateTable(roleList);
-        infoBox("Saved successfully", "Success");     
+            String orderId =  IdShow.getText();
+            
+            ecosystem.getOrderDirectory().setOrderDeliver(orderId, DeliverShow.getText(),ecosystem.getOrderDirectory().getOrderList());
+            
+            ecosystem.getDeliveryManDirectory().setDeliverWork(orderId, DeliverShow.getText(),ecosystem.getDeliveryManDirectory().getDeliveryManList());
+            
+            populateOrderTable(ua);
+            populateDeliverTable();
+            infoBox("Set deliver successfully", "Success");     
         }else {
-            infoBox("Invalid password type, please check", "Invalid");
+            infoBox("Invalid Deliver, please check", "Invalid");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         // TODO add your handling code here:
-        String name = nameShow.getText();
+        String name = IdShow.getText();
         
-          for( UserAccount ua :roleList){
-              if(ua.getUsername().equals(name)){
-                   
-                    roleList.remove(ua); 
-                    showInformation(new UserAccount());
-                    break;    
-              }
-           }
+//          for( UserAccount ua :roleList){
+//              if(ua.getUsername().equals(name)){
+//                   
+//                    roleList.remove(ua); 
+//                    showInformation(new UserAccount());
+//                    break;    
+//              }
+//           }
           
-         for( UserAccount ua :list){
-              if(ua.getUsername().equals(name)){
-                 
-                    list.remove(ua);      
-                    break;    
-              }
-           }
-        populateTable(roleList);
+//         for( UserAccount ua :list){
+//              if(ua.getUsername().equals(name)){
+//                 
+//                    list.remove(ua);      
+//                    break;    
+//              }
+//           }
+        populateOrderTable(ua);
         
-        infoBox("Delete successfully", "Success");
-    }//GEN-LAST:event_deleteActionPerformed
-
-    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUserNameActionPerformed
-
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
-        if(typeCheck()){
-            String name  = txtUserName.getText();
-            String pwd = txtPsw.getText();
-               
-              if(roleType.getValue().equals(RoleType.RestaurantAdmin.toString())){
-                    
-                   String resta =  txtRes.getText();
-                   if(resta == ""){
-                      infoBox("restaurant null!!!", "invalid");
-                      return; 
-                   } 
-
-                  UserAccount ua =  ecosystem.getUserAccountDirectory().createUserAccount(name, pwd,new Employee(resta),new ResAdminRole());          
-                  ecosystem.getRestaurantDirectory().createRestaurantList(name,ecosystem.getRestaurantDirectory().getRestaurantList(),ua.getEmployee());
-                  
-                  populateTable(ecosystem.getUserAccountDirectory().getKeyRole(RoleType.RestaurantAdmin));
-                  
-            }else if(roleType.getValue().equals(RoleType.Customer.toString())){
-
-                      UserAccount ua =  ecosystem.getUserAccountDirectory().createUserAccount(name, pwd, ecosystem.getEmployeeDirectory().getEmployeeList().get(0),new CustomerRole());
-                      ecosystem.getCustomerDirectory().createCustomer(name,ecosystem.getCustomerDirectory().getCustomerList());
-                    
-                      populateTable(ecosystem.getUserAccountDirectory().getKeyRole(RoleType.Customer));
-                      
-            }else if(roleType.getValue().equals(RoleType.DeliveryMan.toString())){
-                
-                    ecosystem.getUserAccountDirectory().createUserAccount(name, pwd, ecosystem.getEmployeeDirectory().getEmployeeList().get(0),new DeliverManRole());
-                    ecosystem.getDeliveryManDirectory().createDeliveryMan(name,ecosystem.getDeliveryManDirectory().getDeliveryManList());
-                    
-                    populateTable(ecosystem.getUserAccountDirectory().getKeyRole(RoleType.DeliveryMan));
-            }
-  
-            
-            infoBox("Information collect!", "valid");
-            
-            txtUserName.setText("");
-            txtPsw.setText("");
-        }else{
-            infoBox("username exist!!!", "invalid");
-        }
-        
-         
-    }//GEN-LAST:event_addButtonActionPerformed
-
-    private void txtPswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPswActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPswActionPerformed
-
-    private void txtResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtResActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtResActionPerformed
+        infoBox("Cancel order successfully", "Success");
+    }//GEN-LAST:event_CancelActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-        SystemAdminWorkAreaJPanel viewPanel = new SystemAdminWorkAreaJPanel(this.jSplitPane1,ecosystem);
-        
-        this.jSplitPane1.setRightComponent(viewPanel);
+       UserAccount user = ecosystem.getUserAccountDirectory().getUserAccountByName(ua.getName());
+       AdminWorkAreaJPanel adminPanel = new AdminWorkAreaJPanel(jSplitPane1,ecosystem,user);
+       jSplitPane1.setRightComponent(adminPanel);
     }//GEN-LAST:event_backActionPerformed
+
+    private void DeliverShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeliverShowActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeliverShowActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
+    private javax.swing.JButton Cancel;
+    private javax.swing.JTextField DeliverShow;
+    private javax.swing.JLabel IdShow;
+    private javax.swing.JTable ShowOrderList;
     private javax.swing.JButton back;
-    private javax.swing.JButton btnFindByName;
+    private javax.swing.JButton btnFindId;
     private javax.swing.JButton btnListAll;
-    private javax.swing.JButton delete;
+    private javax.swing.JLabel enterpriseLabel1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabelRes;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFindByBrand;
     private javax.swing.JLabel lblView;
-    private javax.swing.JLabel nameShow;
-    private javax.swing.JTextField pswShow;
-    private javax.swing.JTable tblPersonView;
-    private javax.swing.JTextField txtFindByName;
-    private javax.swing.JTextField txtPsw;
-    private javax.swing.JTextField txtRes;
+    private javax.swing.JTable tblDeliverView;
+    private javax.swing.JTextField txtFindById;
     private javax.swing.JLabel txtRole;
-    private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 
    
     
-    public void populateTable(List<UserAccount> list){
+    public void populateOrderTable(Restaurant ua){
 
-        DefaultTableModel personModel = (DefaultTableModel) tblPersonView.getModel();
+        DefaultTableModel orderModel = (DefaultTableModel) ShowOrderList.getModel();
      
-        personModel.setRowCount(0);
+        orderModel.setRowCount(0);
            
-         for(UserAccount person:list){
-            Object[] row = new Object[4];
-               
-            row[0] = person.getUsername();
-            row[1] = person.getPassword();
-            row[2] = person.getRole();
-            row[3] = person.getEmployee();
-            
-            personModel.addRow(row);
-         }
-  
-    }
-   
+        List<Order> list = ecosystem.getOrderDirectory().getOrderListByRest(ua.getName(), ecosystem.getOrderDirectory().getOrderList());
+         
+     
+          for(Order order:list){
+            Object[] row = new Object[6];
 
-    private void showInformation(UserAccount person) {
-             if(person!=null){
-                 nameShow.setText(person.getUsername());
-                 pswShow.setText(person.getPassword()+"");    
+            StringBuffer sb = new StringBuffer();
+   
+            for(String item:order.getMenu().keySet()){
+                  sb.append(item+":");
+                  sb.append(order.getMenu().get(item)+"  ");
+            }
+            
+            row[0] = order.getOrderId();
+            row[1] = order.getDeliver();
+            row[2] = order.getRestaurant();
+            row[3] = sb.toString();
+            row[4] = order.getTotalPrice();
+            row[5] = order.getStatus();
+
+            orderModel.addRow(row);
+         }
+    }
+    
+    
+      public void populateOrderTable(Order order){
+
+        DefaultTableModel orderModel = (DefaultTableModel) ShowOrderList.getModel();
+     
+        orderModel.setRowCount(0);
+           
+     
+            Object[] row = new Object[6];
+
+            StringBuffer sb = new StringBuffer();
+            
+
+            for(String item:order.getMenu().keySet()){
+                  sb.append(item+":");
+                  sb.append(order.getMenu().get(item)+"  ");
+            }
+            
+            row[0] = order.getOrderId();
+            row[1] = order.getDeliver();
+            row[2] = order.getRestaurant();
+            row[3] = sb.toString();
+            row[4] = order.getTotalPrice();
+            row[5] = order.getStatus();
+
+            orderModel.addRow(row);
+    }
+      
+    public void populateDeliverTable(){
+
+        DefaultTableModel deliverModel = (DefaultTableModel) tblDeliverView.getModel();
+        deliverModel.setRowCount(0);
+        
+   
+        
+         List<DeliveryMan> list = ecosystem.getDeliveryManDirectory().getDeliveryManList();
+         
+          for(DeliveryMan deliver:list){
+            Object[] row = new Object[2];
+             
+            row[0] = deliver.getName();
+            row[1] = deliver.getStatus();
+          
+            deliverModel.addRow(row);
+         }
+       
+    }
+    
+    
+    private void showInformation(Order order) {
+             if(order!=null){
+                 IdShow.setText(order.getOrderId()); 
              }
     }
 
     private void populateTablePerson(UserAccount person) {
-        DefaultTableModel personModel = (DefaultTableModel) tblPersonView.getModel();
+        DefaultTableModel personModel = (DefaultTableModel) tblDeliverView.getModel();
      
             personModel.setRowCount(0);
            

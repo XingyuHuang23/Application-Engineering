@@ -7,7 +7,8 @@ package Business.DeliveryMan;
 
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author harold
@@ -19,19 +20,32 @@ public class DeliveryMan extends UserAccount {
     private int id;
     private static int count = 1;
     private Role role;
-    
-     public String getStatus() {
+     private List<String> orders;
+     
+      public List<String> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<String> orders) {
+        this.orders = orders;
+    }
+
+    public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
+    
     public DeliveryMan() {
         id = count;
         count++;
+        this.status = "waiting";
+        this.orders = new ArrayList<String>();
     }
-   public Role getRole() {
+    
+    public Role getRole() {
         return role;
     }
 

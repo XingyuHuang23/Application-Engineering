@@ -55,8 +55,12 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
         assignJButton = new javax.swing.JButton();
-        processJButton = new javax.swing.JButton();
-        refreshJButton = new javax.swing.JButton();
+        Find = new javax.swing.JButton();
+        requestTestJButton2 = new javax.swing.JButton();
+        messageJTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -68,7 +72,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Order id", "Restaurant", "Customer", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -94,31 +98,47 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
             workRequestJTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 58, 375, 96));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 375, 96));
 
-        assignJButton.setText("Assign to me");
+        assignJButton.setText("Finish ");
         assignJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignJButtonActionPerformed(evt);
             }
         });
-        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 80, -1));
 
-        processJButton.setText("Process");
-        processJButton.addActionListener(new java.awt.event.ActionListener() {
+        Find.setText("Find");
+        Find.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                processJButtonActionPerformed(evt);
+                FindActionPerformed(evt);
             }
         });
-        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, -1));
+        add(Find, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, -1));
 
-        refreshJButton.setText("Refresh");
-        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+        requestTestJButton2.setText("List all");
+        requestTestJButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshJButtonActionPerformed(evt);
+                requestTestJButton2ActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 26, -1, -1));
+        add(requestTestJButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
+
+        messageJTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                messageJTextField1ActionPerformed(evt);
+            }
+        });
+        add(messageJTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 89, 20));
+
+        jLabel3.setText(" id");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
+
+        jLabel4.setText("order id");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+
+        jLabel5.setText("order id :");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
@@ -136,21 +156,27 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_assignJButtonActionPerformed
 
-    private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
-        
+    private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
 
-        
-    }//GEN-LAST:event_processJButtonActionPerformed
+    }//GEN-LAST:event_FindActionPerformed
 
-    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-        populateTable();
-    }//GEN-LAST:event_refreshJButtonActionPerformed
+    private void requestTestJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_requestTestJButton2ActionPerformed
+
+    private void messageJTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_messageJTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_messageJTextField1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Find;
     private javax.swing.JButton assignJButton;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton processJButton;
-    private javax.swing.JButton refreshJButton;
+    private javax.swing.JTextField messageJTextField1;
+    private javax.swing.JButton requestTestJButton2;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
 }
