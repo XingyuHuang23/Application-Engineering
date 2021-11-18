@@ -41,7 +41,16 @@ public class Restaurant extends UserAccount{
        Food food = new Food(name,price);
       this.menu.add(food);
     }
-
+    public void modify(String name,int price){
+       
+       for(Food food:this.menu){
+           if(food.getName().equals(name)){
+                food.setPrice(price);
+                break;
+           }
+       }
+       
+    }
     public void setMenu(List<Food> menu) {
         this.menu = menu;
     }

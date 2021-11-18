@@ -63,7 +63,6 @@ public class OrderDirectory {
      public List<Order> getOrderListByRestAndFinished(String rest,ArrayList<Order> orderList){
                 List<Order> list = new ArrayList<Order>();
                  for(Order order:orderList){ 
-                     System.out.print(order.getRestaurant()+"内部name");
                     if(order.getRestaurant().equals(rest) && order.getStatus().equals("Finished")){      
                            list.add(order);
                     }      

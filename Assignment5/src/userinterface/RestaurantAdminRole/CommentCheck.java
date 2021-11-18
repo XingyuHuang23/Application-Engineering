@@ -119,7 +119,7 @@ public class CommentCheck extends javax.swing.JPanel {
            
         List<Order> list = ecosystem.getOrderDirectory().getOrderListByRestAndFinished(ua.getName(), ecosystem.getOrderDirectory().getOrderList());
         
-         System.out.print("size!!!!"+list.size());
+        
           for(Order order:list){
             Object[] row = new Object[7];
 

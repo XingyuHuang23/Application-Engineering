@@ -101,6 +101,7 @@ public class MenuManage extends javax.swing.JPanel {
         txtPrice = new javax.swing.JTextField();
         back = new javax.swing.JButton();
         txtRole = new javax.swing.JLabel();
+        modify = new javax.swing.JButton();
 
         lblView.setFont(new java.awt.Font("宋体", 0, 18)); // NOI18N
         lblView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -157,6 +158,13 @@ public class MenuManage extends javax.swing.JPanel {
             }
         });
 
+        modify.setText("Modify");
+        modify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,6 +187,8 @@ public class MenuManage extends javax.swing.JPanel {
                             .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(104, 104, 104)
                             .addComponent(txtRole)
+                            .addGap(18, 18, 18)
+                            .addComponent(modify, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -200,7 +210,8 @@ public class MenuManage extends javax.swing.JPanel {
                     .addComponent(txtFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addButton)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRole))
+                    .addComponent(txtRole)
+                    .addComponent(modify))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -208,7 +219,7 @@ public class MenuManage extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(back))
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
    
@@ -248,7 +259,24 @@ public class MenuManage extends javax.swing.JPanel {
          }
         return flag;
     }
-    
+     private boolean modifyCheck(){
+        boolean flag = true;
+        String check;
+
+        if(!isValidString(txtFood.getText())){
+            txtFood.setText("");
+            flag = false;
+        }
+        if(isValidFoodName(txtFood.getText())){
+            txtFood.setText("");
+            flag = false;
+         }
+        if(!isValidInt(txtPrice.getText())){
+            txtPrice.setText("");
+            flag = false;
+         }
+        return flag;
+    }
     private void txtFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFoodActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFoodActionPerformed
@@ -284,6 +312,23 @@ public class MenuManage extends javax.swing.JPanel {
             // TODO add your handling code here:
     }//GEN-LAST:event_backActionPerformed
 
+    private void modifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyActionPerformed
+        // TODO add your handling code here:
+         if(modifyCheck()){
+            String food  = txtFood.getText();
+            int price = Integer.valueOf(txtPrice.getText());
+
+             ua.modify(food,price);
+             populateTable(ua.getMenu());
+             infoBox("Information modify!", "valid");     
+            txtFood.setText("");
+            txtPrice.setText("");
+            
+        }else{
+            infoBox("food name not exist!!!", "invalid");
+        }
+    }//GEN-LAST:event_modifyActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -292,6 +337,7 @@ public class MenuManage extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFindByBrand;
     private javax.swing.JLabel lblView;
+    private javax.swing.JButton modify;
     private javax.swing.JLabel priceTxt;
     private javax.swing.JTable tblPersonView;
     private javax.swing.JTextField txtFood;

@@ -390,8 +390,12 @@ public class OrderManage extends javax.swing.JPanel {
         // TODO add your handling code here:
             String orderId = IdShow.getText();
             if(isValid(orderId)){
-                      Order order =  ecosystem.getOrderDirectory().cancelOrder(orderId,ecosystem.getOrderDirectory().getOrderList());
-           
+                  Order order =  ecosystem.getOrderDirectory().cancelOrder(orderId,ecosystem.getOrderDirectory().getOrderList());
+                if(order.getStatus().equals("Finished")){
+                       infoBox("Order have already finished!!", "invalid");
+                       return;
+                  }
+
                if(order.getDeliver()!=null){
                   ecosystem.getDeliveryManDirectory().cancelOrFinishedDrliver(order.getDeliver(),order.getOrderId(),ecosystem.getDeliveryManDirectory().getDeliveryManList());
                }
