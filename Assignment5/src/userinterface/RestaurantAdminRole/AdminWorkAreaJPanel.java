@@ -53,7 +53,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setText("My Work Area -Adminstrative Role");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
-        userJButton.setText("Manage Restaurant Info");
+        userJButton.setText("Check comments");
         userJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userJButtonActionPerformed(evt);
@@ -101,7 +101,10 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
-
+                Restaurant rest = ecosystem.getRestaurantDirectory().getInstanceByName(ua.getUsername(),ecosystem.getRestaurantDirectory().getRestaurantList());
+               
+                OrderManage order = new OrderManage(ecosystem,splitPanel,rest);
+                splitPanel.setRightComponent(order);
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
     
     

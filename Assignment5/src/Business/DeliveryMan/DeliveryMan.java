@@ -13,11 +13,20 @@ import Business.UserAccount.UserAccount;
  * @author harold
  */
 public class DeliveryMan extends UserAccount {
-     private String name;
+    
+    private String name;
+    private String status;
     private int id;
     private static int count = 1;
     private Role role;
     
+     public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public DeliveryMan() {
         id = count;
         count++;

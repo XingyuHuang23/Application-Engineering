@@ -33,7 +33,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="userJButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Manage Restaurant Info"/>
+        <Property name="text" type="java.lang.String" value="Check comments"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userJButtonActionPerformed"/>

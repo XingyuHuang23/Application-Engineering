@@ -20,6 +20,7 @@ public class Order {
     private String status;
     private String orderId;
     private int totalPrice;
+    private String comment;
     public Order(HashMap<String,Integer> menu,String customer,String restuarnt,String status,int price){
             this.menu = menu;
             this.customer =customer;
@@ -28,8 +29,16 @@ public class Order {
             this.orderId = UUID.randomUUID().toString().substring(0,5);
             this.deliver = "waiting...";
             this.totalPrice = price;
+            this.comment="";
     }
     
+     public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
     public int getTotalPrice() {
         return totalPrice;
     }

@@ -43,32 +43,40 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        requestTestJButton = new javax.swing.JButton();
+        Find = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         messageJTextField = new javax.swing.JTextField();
         backJButton = new javax.swing.JButton();
         valueLabel = new javax.swing.JLabel();
         enterpriseLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ShowOrderList = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        requestTestJButton1 = new javax.swing.JButton();
+        requestTestJButton2 = new javax.swing.JButton();
+        messageJTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        valueLabel1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        requestTestJButton.setText("Request Test");
-        requestTestJButton.addActionListener(new java.awt.event.ActionListener() {
+        Find.setText("Find");
+        Find.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                requestTestJButtonActionPerformed(evt);
+                FindActionPerformed(evt);
             }
         });
-        add(requestTestJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, -1, -1));
+        add(Find, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, -1, -1));
 
-        jLabel1.setText("Message");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 40, -1, -1));
+        jLabel1.setText("order id");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
 
         messageJTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 messageJTextFieldActionPerformed(evt);
             }
         });
-        add(messageJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 37, 89, -1));
+        add(messageJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 110, 20));
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -76,21 +84,83 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 138, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 130, -1));
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 130, -1));
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("EnterPrise :");
         add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 120, 30));
+
+        ShowOrderList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Order Id", "Deliver", "Resturant", "Items", "Price", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(ShowOrderList);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 450, 100));
+
+        jLabel2.setText("Message");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
+
+        requestTestJButton1.setText("Comment");
+        requestTestJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestTestJButton1ActionPerformed(evt);
+            }
+        });
+        add(requestTestJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 170, -1));
+
+        requestTestJButton2.setText("List all");
+        requestTestJButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestTestJButton2ActionPerformed(evt);
+            }
+        });
+        add(requestTestJButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
+
+        messageJTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                messageJTextField1ActionPerformed(evt);
+            }
+        });
+        add(messageJTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 89, 20));
+
+        jLabel3.setText("order id");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
+
+        valueLabel1.setText("<value>");
+        add(valueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
+    private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
         
         
         
-    }//GEN-LAST:event_requestTestJButtonActionPerformed
+    }//GEN-LAST:event_FindActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         
@@ -108,12 +178,32 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_messageJTextFieldActionPerformed
 
+    private void requestTestJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_requestTestJButton1ActionPerformed
+
+    private void requestTestJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_requestTestJButton2ActionPerformed
+
+    private void messageJTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_messageJTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_messageJTextField1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Find;
+    private javax.swing.JTable ShowOrderList;
     private javax.swing.JButton backJButton;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField messageJTextField;
-    private javax.swing.JButton requestTestJButton;
+    private javax.swing.JTextField messageJTextField1;
+    private javax.swing.JButton requestTestJButton1;
+    private javax.swing.JButton requestTestJButton2;
     private javax.swing.JLabel valueLabel;
+    private javax.swing.JLabel valueLabel1;
     // End of variables declaration//GEN-END:variables
 }
