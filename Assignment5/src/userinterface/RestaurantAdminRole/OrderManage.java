@@ -461,7 +461,7 @@ public class OrderManage extends javax.swing.JPanel {
             
             row[0] = order.getOrderId();
             row[1] = order.getDeliver();
-            row[2] = order.getRestaurant();
+            row[2] = order.getCustomer();
             row[3] = sb.toString();
             row[4] = order.getTotalPrice();
             row[5] = order.getStatus();
@@ -525,20 +525,6 @@ public class OrderManage extends javax.swing.JPanel {
              }
     }
 
-    private void populateTablePerson(UserAccount person) {
-        DefaultTableModel personModel = (DefaultTableModel) tblDeliverView.getModel();
-     
-            personModel.setRowCount(0);
-           
-            Object[] row = new Object[4];
-    
-            row[0] = person.getUsername();
-            row[1] = person.getPassword();
-            row[2] = person.getRole();
-            row[3] = person.getEmployee();
-            
-            personModel.addRow(row);
-         
-    }
+ 
     
 }

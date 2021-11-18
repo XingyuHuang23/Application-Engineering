@@ -229,6 +229,7 @@ public class CommentJPanel extends javax.swing.JPanel {
             orderModel.addRow(row);
          }
     }
+    
  public void populateTable(Order order){
         
  
@@ -301,7 +302,6 @@ public class CommentJPanel extends javax.swing.JPanel {
                populateTable(order); 
               infoBox("comments success!", "Success"); return;  
           }
-            
         }else{
             infoBox("comments null!, please check", "Invalid"); return;
         }

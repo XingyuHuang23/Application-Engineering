@@ -88,7 +88,10 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
         // TODO add your handling code here:
-        
+                Restaurant rest = ecosystem.getRestaurantDirectory().getInstanceByName(ua.getUsername(),ecosystem.getRestaurantDirectory().getRestaurantList());
+               
+                CommentCheck commentCheck = new CommentCheck(splitPanel,rest,ecosystem);
+                splitPanel.setRightComponent(commentCheck);
     }//GEN-LAST:event_userJButtonActionPerformed
 
     private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
