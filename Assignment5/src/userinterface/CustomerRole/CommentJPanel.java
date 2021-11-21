@@ -86,17 +86,17 @@ public class CommentJPanel extends javax.swing.JPanel {
                 FindActionPerformed(evt);
             }
         });
-        add(Find, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, -1, -1));
+        add(Find, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 70, 30));
 
         jLabel1.setText("order id:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
 
         comments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 commentsActionPerformed(evt);
             }
         });
-        add(comments, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 110, 20));
+        add(comments, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 130, -1));
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +104,7 @@ public class CommentJPanel extends javax.swing.JPanel {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
 
         idShow.setText("id");
         add(idShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 130, -1));
@@ -141,10 +141,10 @@ public class CommentJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(ShowOrderList);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 670, 100));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 670, 100));
 
         jLabel2.setText("Comment:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, 20));
 
         requestTestJButton1.setText("Comment");
         requestTestJButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +152,7 @@ public class CommentJPanel extends javax.swing.JPanel {
                 requestTestJButton1ActionPerformed(evt);
             }
         });
-        add(requestTestJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 170, -1));
+        add(requestTestJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 170, -1));
 
         ListAll.setText("List all");
         ListAll.addActionListener(new java.awt.event.ActionListener() {
@@ -160,17 +160,17 @@ public class CommentJPanel extends javax.swing.JPanel {
                 ListAllActionPerformed(evt);
             }
         });
-        add(ListAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
+        add(ListAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 90, 30));
 
         IdInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IdInputActionPerformed(evt);
             }
         });
-        add(IdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 89, 20));
+        add(IdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 120, 30));
 
         jLabel3.setText("order id");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, 20));
 
         customerName.setText("<value>");
         add(customerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 130, -1));
@@ -240,9 +240,7 @@ public class CommentJPanel extends javax.swing.JPanel {
            Object[] row = new Object[7];
 
             StringBuffer sb = new StringBuffer();
-            
-            System.out.print(order.getStatus()+"sta");
-            
+    
             for(String item:order.getMenu().keySet()){
                   sb.append(item+":");
                   sb.append(order.getMenu().get(item)+"  ");
@@ -257,8 +255,7 @@ public class CommentJPanel extends javax.swing.JPanel {
             row[6] = order.getComment();   
             
             orderModel.addRow(row);
-           
-       
+
     }
      private boolean isValid(String s){
         return s.matches("^[A-Za-z0-9]+$");

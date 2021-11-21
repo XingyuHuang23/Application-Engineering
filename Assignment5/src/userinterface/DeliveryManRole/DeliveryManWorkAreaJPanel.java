@@ -148,7 +148,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 FindActionPerformed(evt);
             }
         });
-        add(Find, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
+        add(Find, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 70, 30));
 
         ListAll.setText("List all");
         ListAll.addActionListener(new java.awt.event.ActionListener() {
@@ -156,20 +156,20 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 ListAllActionPerformed(evt);
             }
         });
-        add(ListAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, -1));
+        add(ListAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 90, 30));
 
         orderIdText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 orderIdTextActionPerformed(evt);
             }
         });
-        add(orderIdText, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 89, 20));
+        add(orderIdText, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 120, 30));
 
         orderIdShow.setText(" id");
         add(orderIdShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
 
         jLabel4.setText("order id");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 50, 20));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 60, 30));
 
         jLabel5.setText("order id :");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
